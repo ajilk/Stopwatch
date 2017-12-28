@@ -15,6 +15,7 @@ public:
 	bool kbhit();
 	WINDOW* newWindow(int rows, int cols, int begin_y, int begin_x);
 	void delWindow(WINDOW* window);
+	void drawBorder(WINDOW *window);
 	~Screen();
 };
 

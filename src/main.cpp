@@ -11,9 +11,34 @@ int main()
 	WINDOW* timeWindow;
 	scoreWindow = screen.newWindow(40, 40, 5, 8);
 	timeWindow = screen.newWindow(40, 115, 5, 55);
-	digits.print(timeWindow, 0, 5, 7);
-	wrefresh(timeWindow); wrefresh(scoreWindow);
-	wgetch(timeWindow);
+	wrefresh(scoreWindow); wrefresh(timeWindow);	
+
+	auto start = steady_clock::now();
+	auto end = steady_clock::now();
+
+
+	int ch = wgetch(timeWindow);
+	while(ch != 'X'){
+		start = steady_clock::now();	
+		nodelay(stdscr, true);	
+		while(!screen.kbhit()){
+			end = steady_clock::now();
+			mvwprintw(timeWindow,1,1,"%.3f", duration_cast<duration<float> >(end-start).count());
+			screen.drawBorder(timeWindow);
+			screen.drawBorder(scoreWindow);
+			wrefresh(timeWindow);
+			digits.print(timeWindow, 0, 10,10);
+		}
+		nodelay(stdscr, false);
+		end = steady_clock::now();
+		mvwprintw(timeWindow, 1,1,"%.3f", std::chrono::duration_cast<std::chrono::duration<float> >(end-start).count());	
+		mvwprintw(scoreWindow, 1,1,"%.3f", std::chrono::duration_cast<std::chrono::duration<float> >(end-start).count());
+		wrefresh(timeWindow); wrefresh(scoreWindow);
+		wgetch(timeWindow);
+
+		ch = wgetch(timeWindow);	
+	}
+	mvprintw(0,0,"STOPPED: Press any key to quit application");
 	return 0;
 }
 /*	
@@ -24,24 +49,6 @@ int main()
 	mvwprintw(timeWindow, 0,0, "time Window");
 	wrefresh(timeWindow);
 	wgetch(timeWindow);
-	auto start = steady_clock::now();
-	auto end = steady_clock::now();
-
-	mvwprintw(timeWindow, 0,0,"Press any key to start");
-	wgetch(timeWindow); 
-	wclear(timeWindow);
-	start = steady_clock::now();	
-	nodelay(stdscr, true);	
-	while(!kbhit()){
-		end = steady_clock::now();
-		mvwprintw(timeWindow,0,0,"%.3f", duration_cast<duration<float> >(end-start).count());
-		wrefresh(timeWindow);
-	}
-	nodelay(stdscr, false);
-	end = steady_clock::now();
-	mvwprintw(timeWindow, 0,0,"%.3f", std::chrono::duration_cast<std::chrono::duration<float> >(end-start).count());	
-	wrefresh(timeWindow);
-	wgetch(timeWindow);
-	endwin();
+		endwin();
 	return 0;	
 }*/
