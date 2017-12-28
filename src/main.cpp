@@ -1,46 +1,40 @@
 #include <ncurses.h>
 #include <chrono>
-bool kbhit() {
-	nodelay(stdscr, TRUE);
+using namespace std::chrono;
+bool kbhit(){
 	int ch = getch();
-    	if (ch != ERR) {
-       		//ungetch(ch);
-    		return true;
-  	 } else {
-     		return false;
-    	}
-	nodelay(stdscr, FALSE);
+	if(ch == ERR)
+		return false;
+	else{
+		//ungetch(ch); 
+		return true;
+	}
 }
-
 int main()
-{	
-	initscr();			/* Start curses mode		*/
-	start_color();
-	curs_set(0);
+{
+	initscr();
 	noecho();
 	cbreak();
-	int i=0;
-	while(getch() == ERR){
-		init_color(COLOR_GREEN, i*3, i*3, i*3);
-		init_pair(1, COLOR_BLACK, COLOR_GREEN);
-		attron(COLOR_PAIR(1));
-		mvprintw(0,0," "); refresh(); i++;
-		attroff(COLOR_PAIR(2));
-		nodelay(stdscr, TRUE);
-	}
-	auto start = std::chrono::steady_clock::now();
-	auto end = std::chrono::steady_clock::now();
-	nodelay(stdscr, TRUE);
-	do{
-		end = std::chrono::steady_clock::now();
-		mvprintw(0,0,"%.3f", std::chrono::duration_cast<std::chrono::duration<float> >(end-start).count());
+	curs_set(0);
+	
+	auto start = steady_clock::now();
+	auto end = steady_clock::now();
+
+	mvprintw(0,0,"Press any key to start");
+	getch(); 
+	clear();
+	start = steady_clock::now();	
+	nodelay(stdscr, true);	
+	while(!kbhit()){
+		end = steady_clock::now();
+		mvprintw(0,0,"%.3f", duration_cast<duration<float> >(end-start).count());
 		refresh();
-	}while(getch() == ERR);
-	nodelay(stdscr, FALSE);
-	end = std::chrono::steady_clock::now();
-	mvprintw(0,0,"%.3f", std::chrono::duration_cast<std::chrono::duration<float> >(end-start).count());
+	}
+	nodelay(stdscr, false);
+	end = steady_clock::now();
+	mvprintw(0,0,"%.3f", std::chrono::duration_cast<std::chrono::duration<float> >(end-start).count());	
 	refresh();
 	getch();
-	endwin();			/* End curses mode 		*/
-	return 0;
+	endwin();
+	return 0;	
 }
