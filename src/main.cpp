@@ -2,44 +2,45 @@
 #include <chrono>
 #include "Screen.h"
 #include "Digits.h"
+#include "Stats.h"
 using namespace std::chrono;
+
 int main()
 {
 	Screen screen;
 	Digits digits;
+	Stats stats;
 	WINDOW* scoreWindow;
 	WINDOW* timeWindow;
 	scoreWindow = screen.newWindow(40, 40, 5, 8);
 	timeWindow = screen.newWindow(40, 115, 5, 55);
-	wrefresh(scoreWindow); wrefresh(timeWindow);	
+	wrefresh(scoreWindow);
+	wrefresh(timeWindow);
 
-	auto start = steady_clock::now();
-	auto end = steady_clock::now();
 
 	int ch = wgetch(timeWindow);
-	while(ch != 'X'){
-		start = steady_clock::now();	
+	while(ch != 'q' && ch != 'Q'){
+		float currentSolveTime;
+		auto start = steady_clock::now();
+		auto end = steady_clock::now();
 		nodelay(stdscr, true);	
 		while(!screen.kbhit()){
 			end = steady_clock::now();
-			float currentTime = duration_cast< duration<float> >(end-start).count();
-			digits.printAll(timeWindow, digits.convert(currentTime), 10, 10);
-			mvwprintw(timeWindow,1,1,"%f", currentTime);
-		
-
-			screen.drawBorder(timeWindow);	screen.drawBorder(scoreWindow);
+			currentSolveTime = duration_cast< duration<float> >(end-start).count();
+			digits.printAll(timeWindow, digits.convert(currentSolveTime), 10, 10);
+			stats.print(scoreWindow, 2, 8);
+			screen.drawBorder(timeWindow);	
+			screen.drawBorder(scoreWindow);
 			wrefresh(timeWindow);
 		}
 		nodelay(stdscr, false);
-		end = steady_clock::now();
-		mvwprintw(timeWindow, 1,1,"%.3f", std::chrono::duration_cast<std::chrono::duration<float> >(end-start).count());	
-		mvwprintw(scoreWindow, 1,1,"%.3f", std::chrono::duration_cast<std::chrono::duration<float> >(end-start).count());
-		wrefresh(timeWindow); wrefresh(scoreWindow);
 		wgetch(timeWindow);
-
+		stats.add(currentSolveTime);
+		stats.print(scoreWindow, 2, 8);
+		wrefresh(scoreWindow);
 		ch = wgetch(timeWindow);	
 	}
-	mvprintw(0,0,"STOPPED: Press any key to quit application");
+
 	return 0;
 }
 /*	

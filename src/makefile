@@ -2,7 +2,7 @@ TARGET = a.out #Stopwatch
 CXXFLAGS = -Wall -std=C++11 -Wc++11-extensions -lncurses
 CC = g++
 
-OBJFILES = main.o Screen.o Coordinate.o Digits.o
+OBJFILES = main.o Screen.o Coordinate.o Digits.o Stats.o
 
 $(TARGET): $(OBJFILES)
 	$(CC) -o $(TARGET) $(CXXFLAGS) $(OBJFILES)
@@ -15,6 +15,9 @@ Coordinate.o: Coordinate.cpp Coordinate.h
 	$(CC) -c Coordinate.cpp
 Digits.o: Digits.cpp Digits.h
 	$(CC) -c Digits.cpp
+Stats.o: Stats.cpp Stats.h
+	$(CC) -c Stats.cpp
+
 
 .PHONY: clean
 clean:

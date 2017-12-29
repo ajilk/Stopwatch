@@ -73,6 +73,8 @@ void Screen::drawBorder(WINDOW* window){
 }
 
 Screen::~Screen(){
+	clear();
+	mvprintw(0,0,"STOPPED: Press any key to quit application");
 	refresh();
 	nodelay(stdscr, FALSE);
 	getch();
