@@ -7,8 +7,6 @@ Screen::Screen(){
 	cbreak();
 	noecho();
 	use_default_colors();
-//	border(ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, 
-//			ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
 	if(!has_colors()){
 		clear();
 		mvprintw(0,0,"ERROR: TERMINAL DOES NOT SUPPORT COLOR");
@@ -24,8 +22,24 @@ Screen::Screen(){
 		endwin();
 		exit (EXIT_FAILURE);	
 	}else
-		start_color();
-//	nodelay(stdscr, TRUE);
+		start_color();	
+	char ch;
+	ifstream infile;
+	infile.open("../digits/beginMessage.txt");
+	while(infile.get(ch)){
+		beginMessage.push_back(ch);	
+	}infile.close();
+	
+	infile.open("../digits/endMessage.txt");
+	while(infile.get(ch)){
+		endMessage.push_back(ch);	
+	}infile.close();
+	
+	infile.open("../digits/confirmMessage.txt");
+	while(infile.get(ch)){
+		confirmMessage.push_back(ch);	
+	}infile.close();
+
 }
 
 int Screen::getRows(){
@@ -72,9 +86,24 @@ void Screen::drawBorder(WINDOW* window){
 	wrefresh(window);
 }
 
+void Screen::print(WINDOW* window, vector<char> message, int start_y, int start_x){
+	wclear(window);
+	int i=0, j=0, count=0;
+	while(count < message.size()){
+		if(message[count] == '\n'){
+			i++;
+			j=0;
+		}
+		else
+			j++;
+		mvwprintw(window, start_y+i, start_x+j, "%c", message[count]);
+		count++;
+	}
+}
+
 Screen::~Screen(){
 	clear();
-	mvprintw(0,0,"STOPPED: Press any key to quit application");
+	print(stdscr, endMessage, 20, 40);		
 	refresh();
 	nodelay(stdscr, FALSE);
 	getch();

@@ -15,6 +15,8 @@ public:
 	float getAverage();
 	float getAverage10();
 	float getAverage5();
+	float getBest();
+	float getWorst();
 	void reset();
 	void print(WINDOW* window, int start_y, int start_x);
 };

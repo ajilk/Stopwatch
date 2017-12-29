@@ -14,33 +14,49 @@ int main()
 	WINDOW* timeWindow;
 	scoreWindow = screen.newWindow(40, 40, 5, 8);
 	timeWindow = screen.newWindow(40, 115, 5, 55);
+	screen.print(timeWindow, screen.getBeginMessage(), 20, 40);
+	screen.drawBorder(timeWindow);
 	wrefresh(scoreWindow);
 	wrefresh(timeWindow);
 
-
-	int ch = wgetch(timeWindow);
-	while(ch != 'q' && ch != 'Q'){
-		float currentSolveTime;
-		auto start = steady_clock::now();
-		auto end = steady_clock::now();
-		nodelay(stdscr, true);	
-		while(!screen.kbhit()){
-			end = steady_clock::now();
-			currentSolveTime = duration_cast< duration<float> >(end-start).count();
-			digits.printAll(timeWindow, digits.convert(currentSolveTime), 10, 10);
+	bool confirmed = false;
+	while(!confirmed){
+		int ch = wgetch(timeWindow);
+		wclear(timeWindow);
+		while(ch != 'q' && ch != 'Q'){
+			wclear(timeWindow);
+			float currentSolveTime;
+			auto start = steady_clock::now();
+			auto end = steady_clock::now();
+			nodelay(stdscr, true);	
+			while(!screen.kbhit()){
+				end = steady_clock::now();
+				currentSolveTime = duration_cast< duration<float> >(end-start).count();
+				digits.printAll(timeWindow, digits.convert(currentSolveTime), 10, 10);
+				stats.print(scoreWindow, 2, 8);
+				screen.drawBorder(timeWindow);	
+				screen.drawBorder(scoreWindow);
+				wrefresh(timeWindow);
+			}
+			nodelay(stdscr, false);
+			wgetch(timeWindow);
+			stats.add(currentSolveTime);
 			stats.print(scoreWindow, 2, 8);
-			screen.drawBorder(timeWindow);	
-			screen.drawBorder(scoreWindow);
+			wrefresh(scoreWindow);
+			ch = wgetch(timeWindow);	
+		}
+		screen.print(timeWindow, screen.getConfirmMessage(), 20, 40);
+		screen.drawBorder(timeWindow);
+		ch = getch();
+		if(ch == 'y' || ch == 'Y')
+			confirmed = true;
+		else{
+			confirmed = false;
+			screen.print(timeWindow, screen.getBeginMessage(), 20, 40);
+			screen.drawBorder(timeWindow);
 			wrefresh(timeWindow);
 		}
-		nodelay(stdscr, false);
-		wgetch(timeWindow);
-		stats.add(currentSolveTime);
-		stats.print(scoreWindow, 2, 8);
-		wrefresh(scoreWindow);
-		ch = wgetch(timeWindow);	
 	}
-
 	return 0;
 }
 /*	

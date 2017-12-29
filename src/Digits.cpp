@@ -4,7 +4,7 @@ Digits::Digits(){
 	ifstream infile;
 	string filename;
 	char ch;
-	for(int i=0; i<10; i++){
+	for(int i=0; i<11; i++){
 		filename = "../digits/" + std::to_string(i) + ".txt";
 		infile.open(filename);
 		if(!infile.is_open()){
@@ -34,10 +34,12 @@ void Digits::print(WINDOW* window, int digit, int start_y, int start_x){
 }
 
 void Digits::printAll(WINDOW* window, vector<int> nums, int start_y, int start_x){
-	int offset = 0;
+	int offset;
+	if(nums.size() < 5) offset = 10;
+	else offset = 0;
 	for(int i=0; i<nums.size(); i++){
-			print(window, nums[i],  start_y, start_x+offset);
-			offset += 10;
+		print(window, nums[i],  start_y, start_x+offset);
+		offset += 10;
 	}
 }
 
@@ -49,6 +51,7 @@ vector<int> Digits::convert(float num){
 	while(!decimalEncountered){
 		if(n.at(i) == '.'){
 			decimalEncountered = true;
+			nums.push_back(10);
 			i++;
 		}
 		nums.push_back(n.at(i)-'0');

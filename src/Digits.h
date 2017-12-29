@@ -10,7 +10,7 @@ using namespace std;
 
 class Digits{
 private:
-	vector<char> number[10]; 
+	vector<char> number[11]; 
 public:
 	Digits();
 	void print(WINDOW* window, int number, int start_y, int start_x);
