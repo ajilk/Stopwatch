@@ -18,6 +18,7 @@ public:
 	float getBest();
 	float getWorst();
 	void reset();
+	void removeLast();
 	void print(WINDOW* window, int start_y, int start_x);
 };
 

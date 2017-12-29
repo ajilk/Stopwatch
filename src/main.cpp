@@ -44,6 +44,13 @@ int main()
 			stats.print(scoreWindow, 2, 8);
 			wrefresh(scoreWindow);
 			ch = wgetch(timeWindow);	
+			while(ch == 'x' && getch() == 'x'){
+				stats.removeLast();
+				wclear(scoreWindow);
+				stats.print(scoreWindow, 2, 8);
+				screen.drawBorder(scoreWindow);
+				wrefresh(scoreWindow);
+			}
 		}
 		screen.print(timeWindow, screen.getConfirmMessage(), 20, 40);
 		screen.drawBorder(timeWindow);

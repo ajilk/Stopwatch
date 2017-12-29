@@ -55,6 +55,10 @@ void Stats::reset(){
 	solves.clear();
 }
 
+void Stats::removeLast(){
+	if(!solves.empty()) solves.pop_back();
+}
+
 void Stats::print(WINDOW* window, int start_y, int start_x){
 	if(solves.size() > 30){
 		for(int i=solves.size()-30; i<solves.size(); i++){
