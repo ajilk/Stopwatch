@@ -16,18 +16,19 @@ int main()
 	auto start = steady_clock::now();
 	auto end = steady_clock::now();
 
-
 	int ch = wgetch(timeWindow);
 	while(ch != 'X'){
 		start = steady_clock::now();	
 		nodelay(stdscr, true);	
 		while(!screen.kbhit()){
 			end = steady_clock::now();
-			mvwprintw(timeWindow,1,1,"%.3f", duration_cast<duration<float> >(end-start).count());
-			screen.drawBorder(timeWindow);
-			screen.drawBorder(scoreWindow);
+			float currentTime = duration_cast< duration<float> >(end-start).count();
+			digits.printAll(timeWindow, digits.convert(currentTime), 10, 10);
+			mvwprintw(timeWindow,1,1,"%f", currentTime);
+		
+
+			screen.drawBorder(timeWindow);	screen.drawBorder(scoreWindow);
 			wrefresh(timeWindow);
-			digits.print(timeWindow, 0, 10,10);
 		}
 		nodelay(stdscr, false);
 		end = steady_clock::now();

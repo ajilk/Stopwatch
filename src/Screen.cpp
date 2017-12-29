@@ -67,13 +67,6 @@ void Screen::delWindow(WINDOW* window){
 }
 
 void Screen::drawBorder(WINDOW* window){
-	int w_rows, w_cols;
-	getmaxyx(window, w_rows, w_cols);
-	for(int i=0; i<w_rows; i++){
-		for(int j=0; j<w_cols; j++){
-			mvwprintw(window, i, j, "_");
-		}
-	} 
 	wborder(window, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER,
 				ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
 	wrefresh(window);

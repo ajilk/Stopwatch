@@ -10,10 +10,12 @@ using namespace std;
 
 class Digits{
 private:
-	vector<char> number[9]; 
+	vector<char> number[10]; 
 public:
 	Digits();
 	void print(WINDOW* window, int number, int start_y, int start_x);
+	void printAll(WINDOW* window, vector<int> nums, int start_y, int start_x);
+	vector<int> convert(float number);
 };
 
 #endif
