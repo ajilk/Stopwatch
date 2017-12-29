@@ -1,4 +1,4 @@
-TARGET = a.out #Stopwatch
+TARGET = stopwatch
 CXXFLAGS = -Wall -std=C++11 -Wc++11-extensions -lncurses
 CC = g++
 
