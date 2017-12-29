@@ -1,1 +1,8 @@
-END MESSAGE!!!!
+     Project Stopwatch
+   (by Azimjon Ilkhomov)
+   
+      Decemeber 2017
+                          
+  fonts generated through
+        patorjk.com
+

@@ -25,7 +25,7 @@ void Digits::print(WINDOW* window, int digit, int start_y, int start_x){
 	for(int i=0; i<number[digit].size(); i++){
 		mvwprintw(window, start_y + offset_y, start_x+offset_x, "%c", number[digit].at(i));
 		offset_x++;
-		if(offset_x == 7){
+		if(offset_x == 10){
 			offset_x = 0;
 			offset_y++;
 		}
@@ -35,11 +35,11 @@ void Digits::print(WINDOW* window, int digit, int start_y, int start_x){
 
 void Digits::printAll(WINDOW* window, vector<int> nums, int start_y, int start_x){
 	int offset;
-	if(nums.size() < 5) offset = 10;
+	if(nums.size() < 6) offset = 12;
 	else offset = 0;
 	for(int i=0; i<nums.size(); i++){
 		print(window, nums[i],  start_y, start_x+offset);
-		offset += 10;
+		offset += 12;
 	}
 }
 
@@ -58,6 +58,7 @@ vector<int> Digits::convert(float num){
 		i++; 
 	}
 	//Read 2 digits after decimal point
+	nums.push_back(n.at(i) -'0'); i++;
 	nums.push_back(n.at(i) -'0');
 	return nums;
 /*

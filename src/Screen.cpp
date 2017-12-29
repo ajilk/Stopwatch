@@ -103,7 +103,7 @@ void Screen::print(WINDOW* window, vector<char> message, int start_y, int start_
 
 Screen::~Screen(){
 	clear();
-	print(stdscr, endMessage, 20, 40);		
+	print(stdscr, endMessage, 20, 70);		
 	refresh();
 	nodelay(stdscr, FALSE);
 	getch();

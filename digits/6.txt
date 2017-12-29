@@ -1,6 +1,8 @@
-ooooooo
-o     o
-o     o
-o  6  o
-o     o
-ooooooo
+    __    
+   / /    
+  / /_    
+ | '_ \   
+ | (_) |  
+  \___/   
+          
+          
