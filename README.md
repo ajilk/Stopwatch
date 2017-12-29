@@ -17,7 +17,7 @@ This was a fun project to work on since it involved timing and visual effects in
 However, I personally did not like the way the project was constructed. Since, I was getting
 new ideas as I was programming it, I tried implementing those new feature without putting too 
 much though to it. This lead to unclear code which could have been avoided if more thought was
-put into it. Refactoring the project would definitly worth it in this case. 
+put into it. Refactoring the project would definitely be worth it in this case. 
 
 ---
 ### Stopwatch is part of the [Concept](https://github.com/azimex/Concept) Series.
