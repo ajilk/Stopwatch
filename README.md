@@ -1,4 +1,4 @@
-## Stopwatch
+## Projet Stopwatch
 Designed to time Rubik's Cube Solves <br />
 <br/> <br/> <img src="demo.gif" width="400" /> <br/> <br/>
 ### To run the program
