@@ -1,11 +1,11 @@
 ## Stopwatch
 Designed to time Rubik's Cube Solves <br />
 <br/> <br/> <img src="demo.gif" width="400" /> <br/> <br/>
-### To run the program
-Make sure NUCRSES is installed and set up <br/>
-Clone and run make <br/>
-The run it by typing ./stopwatch <br/>
-And press Q to end program
+### How to Play
+`make` and run it by typing `./stopwatch` <br/>
+To start/stop the stopwatch: `press any key` <br/>
+To remove last solve: `x or X` <br/>
+To quit program: `q or Q` <br/>
 
 ### Features
  - Offers Visual Fonts which can be interchanged through a file (that fits the requirement) with ease <br/>
