@@ -13,7 +13,7 @@ To quit program: `q or Q` <br/>
  - Ability to remove last solve time <br/>
 
 ### Observations
-This was a fun project to work on since it involved timing and visual effects involved.
+This was a fun project to work on since it involved timing and visual effects.
 However, I personally did not like the way the project was constructed. Since, I was getting
 new ideas as I was programming it, I tried implementing those new feature without putting too 
 much though to it. This lead to unclear code which could have been avoided if more thought was
