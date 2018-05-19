@@ -21,5 +21,3 @@ put into it. Refactoring the project would definitely be worth it in this case.
 
 ---
 ### Stopwatch is part of the [Concept](https://github.com/azimex/Concept) Series.
-
-[test](cc83462e08386ae01d98406080eea2838741e361)
